@@ -3,6 +3,7 @@ package ru.job4j.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
@@ -12,10 +13,8 @@ import static org.quartz.SimpleScheduleBuilder.*;
 
 public class AlertRabbit {
     public static void main(String[] args) {
-        try (InputStream in = AlertRabbit.class.getClassLoader()
-                .getResourceAsStream("rabbit.properties")) {
-            Properties config = new Properties();
-            config.load(in);
+        try {
+            Properties config = getProperties("rabbit.properties");
             int time = Integer.parseInt(config.getProperty("rabbit.interval"));
             Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
             scheduler.start();
@@ -35,7 +34,18 @@ public class AlertRabbit {
         }
     }
 
-    public static class Rabbit implements Job {
+    public static Properties getProperties(String name) {
+        Properties config = new Properties();
+        try (InputStream in = AlertRabbit.class.getClassLoader()
+                .getResourceAsStream(name)) {
+            config.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return config;
+    }
+
+        public static class Rabbit implements Job {
         @Override
         public void execute(JobExecutionContext context) throws JobExecutionException {
             System.out.println("Rabbit runs here ...");
