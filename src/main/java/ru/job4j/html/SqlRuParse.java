@@ -3,6 +3,10 @@ package ru.job4j.html;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class SqlRuParse {
     public static void main(String[] args) throws Exception {
@@ -22,5 +26,24 @@ public class SqlRuParse {
                 System.out.println(newDate.get(i).text());
             }
         }
+    }
+
+    public static LocalDateTime getLocalDateTime(String date) {
+        String[] dateArray = date.split(", ");
+        LocalDateTime localDateTime;
+        LocalDate localDate;
+        LocalTime localTime = LocalTime.parse(dateArray[1], DateTimeFormatter.ofPattern("HH:mm"));
+
+        if (dateArray[0].equals("сегодня")) {
+            localDate = LocalDate.now();
+            localDateTime = LocalDateTime.of(localDate, localTime);
+        } else if (date.contains("вчера")) {
+            localDate = LocalDate.now().minusDays(1);
+            localDateTime = LocalDateTime.of(localDate, localTime);
+        } else {
+            localDateTime = LocalDateTime.parse(
+                    date, DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm"));
+        }
+        return localDateTime;
     }
 }
