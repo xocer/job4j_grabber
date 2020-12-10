@@ -32,28 +32,4 @@ public class SqlRuParse {
             }
         }
     }
-
-    public static LocalDateTime getLocalDateTime(String date) throws ParseException {
-        String[] dateArray = date.split(", ");
-        LocalDateTime localDateTime;
-        LocalDate localDate;
-        LocalTime localTime = LocalTime.parse(dateArray[1], DateTimeFormatter.ofPattern("HH:mm"));
-
-        if (dateArray[0].equals("сегодня")) {
-            localDate = LocalDate.now();
-            localDateTime = LocalDateTime.of(localDate, localTime);
-        } else if (date.contains("вчера")) {
-            localDate = LocalDate.now().minusDays(1);
-            localDateTime = LocalDateTime.of(localDate, localTime);
-        } else {
-            DateFormatSymbols dfs = new DateFormatSymbols();
-            String[] months = {"янв", "фев", "мар", "апр", "май", "июн",
-                    "июл", "авг", "сен", "окт", "ноя", "дек"};
-            dfs.setShortMonths(months);
-            SimpleDateFormat sdf = new SimpleDateFormat("d MMM yy, HH:mm", dfs);
-            Date tmp = sdf.parse(date);
-            localDateTime = tmp.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-        }
-        return localDateTime;
-    }
 }
