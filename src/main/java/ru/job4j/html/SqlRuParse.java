@@ -2,16 +2,13 @@ package ru.job4j.html;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.TextNode;
 import org.jsoup.select.Elements;
-import java.text.DateFormatSymbols;
+import ru.job4j.grabber.Post;
+import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.List;
 
 public class SqlRuParse {
     public static void main(String[] args) throws Exception {
@@ -31,5 +28,21 @@ public class SqlRuParse {
                 System.out.println(newDate.get(i).text());
             }
         }
+    }
+
+    public static Post getPost(String url) throws IOException, ParseException {
+        Post post;
+        String text;
+        LocalDateTime date;
+        Document doc = Jsoup.connect(url).get();
+        Elements texts = doc.select(".msgBody");
+        text = texts.get(1).text();
+        Elements dates = doc.select(".msgFooter");
+        List<TextNode> q = dates.get(0).textNodes();
+        String s = q.get(0).text();
+        s = s.substring(0, s.lastIndexOf(" "));
+        date = DateTimeUtils.getLocalDateTime(s);
+        post = new Post(text, date);
+        return post;
     }
 }
