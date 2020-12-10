@@ -28,7 +28,7 @@ public class DateTimeUtils {
         LocalDate localDate;
         LocalTime localTime = LocalTime.parse(dateArray[1], DateTimeFormatter.ofPattern("HH:mm"));
 
-        if (dateArray[0].equals("сегодня")) {
+        if (dateArray[0].contains("сегодня")) {
             localDate = LocalDate.now();
             localDateTime = LocalDateTime.of(localDate, localTime);
         } else if (date.contains("вчера")) {
