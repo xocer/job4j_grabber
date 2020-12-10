@@ -3,10 +3,15 @@ package ru.job4j.html;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import java.text.DateFormatSymbols;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class SqlRuParse {
     public static void main(String[] args) throws Exception {
@@ -28,7 +33,7 @@ public class SqlRuParse {
         }
     }
 
-    public static LocalDateTime getLocalDateTime(String date) {
+    public static LocalDateTime getLocalDateTime(String date) throws ParseException {
         String[] dateArray = date.split(", ");
         LocalDateTime localDateTime;
         LocalDate localDate;
@@ -41,8 +46,13 @@ public class SqlRuParse {
             localDate = LocalDate.now().minusDays(1);
             localDateTime = LocalDateTime.of(localDate, localTime);
         } else {
-            localDateTime = LocalDateTime.parse(
-                    date, DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm"));
+            DateFormatSymbols dfs = new DateFormatSymbols();
+            String[] months = {"янв", "фев", "мар", "апр", "май", "июн",
+                    "июл", "авг", "сен", "окт", "ноя", "дек"};
+            dfs.setShortMonths(months);
+            SimpleDateFormat sdf = new SimpleDateFormat("d MMM yy, HH:mm", dfs);
+            Date tmp = sdf.parse(date);
+            localDateTime = tmp.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
         }
         return localDateTime;
     }
