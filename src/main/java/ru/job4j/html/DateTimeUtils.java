@@ -11,18 +11,23 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class DateTimeUtils {
+    private static final String DEFAULT_DATE_PATTERN = "d MMM yy";
+    private final String pattern;
 
-    public static SimpleDateFormat getSimpleDateFormat(String pattern) {
+    public DateTimeUtils() {
+        this.pattern = DEFAULT_DATE_PATTERN;
+    }
+
+    private SimpleDateFormat getSimpleDateFormat() {
         DateFormatSymbols dfs = new DateFormatSymbols();
         String[] months = {"янв", "фев", "мар", "апр", "май", "июн",
                 "июл", "авг", "сен", "окт", "ноя", "дек"};
         dfs.setShortMonths(months);
-        final String template = pattern;
-        SimpleDateFormat sdf = new SimpleDateFormat(template, dfs);
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern, dfs);
         return sdf;
     }
 
-    public static LocalDateTime getLocalDateTime(String date) throws ParseException {
+    public LocalDateTime getLocalDateTime(String date) throws ParseException {
         String[] dateArray = date.split(", ");
         LocalDateTime localDateTime;
         LocalDate localDate;
@@ -35,7 +40,7 @@ public class DateTimeUtils {
             localDate = LocalDate.now().minusDays(1);
             localDateTime = LocalDateTime.of(localDate, localTime);
         } else {
-            SimpleDateFormat sdf = getSimpleDateFormat("d MMM yy");
+            SimpleDateFormat sdf = getSimpleDateFormat();
             Date tmp = sdf.parse(date);
             localDate = tmp.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             localDateTime = LocalDateTime.of(localDate, localTime);

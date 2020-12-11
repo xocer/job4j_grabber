@@ -44,7 +44,8 @@ public class SqlRuParse  implements Parse {
         List<TextNode> q = dates.get(0).textNodes();
         String s = q.get(0).text();
         s = s.substring(0, s.lastIndexOf(" "));
-        date = DateTimeUtils.getLocalDateTime(s);
+        DateTimeUtils dtu = new DateTimeUtils();
+        date = dtu.getLocalDateTime(s);
         post = new Post(text, date);
         return post;
     }
