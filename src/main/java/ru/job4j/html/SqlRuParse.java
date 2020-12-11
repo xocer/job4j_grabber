@@ -34,19 +34,16 @@ public class SqlRuParse  implements Parse {
     }
 
     public static Post getPost(String url) throws IOException, ParseException {
-        Post post;
-        String text;
-        LocalDateTime date;
         Document doc = Jsoup.connect(url).get();
         Elements texts = doc.select(".msgBody");
-        text = texts.get(1).text();
+        String text = texts.get(1).text();
         Elements dates = doc.select(".msgFooter");
         List<TextNode> q = dates.get(0).textNodes();
         String s = q.get(0).text();
         s = s.substring(0, s.lastIndexOf(" "));
         DateTimeUtils dtu = new DateTimeUtils();
-        date = dtu.getLocalDateTime(s);
-        post = new Post(text, date);
+        LocalDateTime date = dtu.getLocalDateTime(s);
+        Post post = new Post(text, date);
         return post;
     }
 
