@@ -35,15 +35,21 @@ public class SqlRuParse  implements Parse {
 
     public static Post getPost(String url) throws IOException, ParseException {
         Document doc = Jsoup.connect(url).get();
+
         Elements texts = doc.select(".msgBody");
         String text = texts.get(1).text();
+
         Elements dates = doc.select(".msgFooter");
         List<TextNode> q = dates.get(0).textNodes();
         String s = q.get(0).text();
         s = s.substring(0, s.lastIndexOf(" "));
         DateTimeUtils dtu = new DateTimeUtils();
         LocalDateTime date = dtu.getLocalDateTime(s);
-        Post post = new Post(text, date);
+
+        Elements names = doc.select(".messageHeader");
+        String name = names.get(0).textNodes().get(0).text();
+
+        Post post = new Post(name, text, url, date);
         return post;
     }
 

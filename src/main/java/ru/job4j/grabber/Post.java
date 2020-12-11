@@ -8,8 +8,10 @@ public class Post {
     private String url;
     private LocalDateTime date;
 
-    public Post(String text, LocalDateTime date) {
+    public Post(String name, String text, String url, LocalDateTime date) {
+        this.name = name;
         this.text = text;
+        this.url = url;
         this.date = date;
     }
 }
