@@ -14,4 +14,30 @@ public class Post {
         this.url = url;
         this.date = date;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    @Override
+    public String toString() {
+        return "Post{"
+                + "name='" + name + '\''
+                + ", text='" + text + '\''
+                + ", url='" + url + '\''
+                + ", date=" + date
+                + '}';
+    }
 }
