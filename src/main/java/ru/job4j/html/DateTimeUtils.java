@@ -12,13 +12,13 @@ import java.util.Date;
 
 public class DateTimeUtils {
     private static final String DEFAULT_DATE_PATTERN = "d MMM yy";
-    private final String pattern;
+    private final SimpleDateFormat format;
 
     public DateTimeUtils() {
-        this.pattern = DEFAULT_DATE_PATTERN;
+        this.format = getSimpleDateFormat(DEFAULT_DATE_PATTERN);
     }
 
-    private SimpleDateFormat getSimpleDateFormat() {
+    private SimpleDateFormat getSimpleDateFormat(String pattern) {
         DateFormatSymbols dfs = new DateFormatSymbols();
         String[] months = {"янв", "фев", "мар", "апр", "май", "июн",
                 "июл", "авг", "сен", "окт", "ноя", "дек"};
@@ -35,16 +35,14 @@ public class DateTimeUtils {
 
         if (dateArray[0].contains("сегодня")) {
             localDate = LocalDate.now();
-            localDateTime = LocalDateTime.of(localDate, localTime);
         } else if (date.contains("вчера")) {
             localDate = LocalDate.now().minusDays(1);
-            localDateTime = LocalDateTime.of(localDate, localTime);
         } else {
-            SimpleDateFormat sdf = getSimpleDateFormat();
-            Date tmp = sdf.parse(date);
+            Date tmp = format.parse(date);
             localDate = tmp.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            localDateTime = LocalDateTime.of(localDate, localTime);
         }
+        localDateTime = LocalDateTime.of(localDate, localTime);
+
         return localDateTime;
     }
 }
