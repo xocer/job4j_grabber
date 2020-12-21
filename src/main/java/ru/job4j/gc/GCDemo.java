@@ -1,5 +1,9 @@
 package ru.job4j.gc;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class GCDemo {
     private static final long KB = 1000;
     private static final long MB = KB * KB;
@@ -16,11 +20,15 @@ public class GCDemo {
     }
 
     public static void main(String[] args) {
-        info();
-        for (int i = 0; i < 10; i++) {
-            new Person(i, "N" + i);
+        List<Person> list = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        while (!s.equals("финиш")) {
+            for (int i = 0; i < 1000; i++) {
+                list.add(new Person(i, "N" + i));
+            }
+            System.out.println("добавлено");
+            s = scanner.nextLine();
         }
-        System.gc();
-        info();
     }
 }
