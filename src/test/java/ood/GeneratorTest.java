@@ -1,4 +1,4 @@
-package gc;
+package ood;
 
 import org.junit.Test;
 
