@@ -1,14 +1,18 @@
 package ru.job4j.ood.srp;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.function.Predicate;
 
 public class AccReport implements Report {
     private final Store store;
+    private final Currency value;
 
-    public AccReport(Store store) {
+    public AccReport(Store store, Currency value) {
         this.store = store;
+        this.value = value;
+    }
+
+    public Currency getValue() {
+        return value;
     }
 
     @Override
@@ -20,7 +24,7 @@ public class AccReport implements Report {
                     .append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() / 70).append("$;");
+                    .append(employee.getSalary() / value.getCost());
         }
         return text.toString();
     }
