@@ -3,9 +3,7 @@ package ood.srp;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import org.junit.Test;
-import ru.job4j.ood.srp.Employee;
-import ru.job4j.ood.srp.MemStore;
-import ru.job4j.ood.srp.ReportEngine;
+import ru.job4j.ood.srp.*;
 
 import java.util.Calendar;
 
@@ -17,7 +15,8 @@ public class ReportEngineTest {
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);
         store.add(worker);
-        ReportEngine engine = new ReportEngine(store);
+        ItReport itReport = new ItReport(store);
+        ReportEngine engine = new ReportEngine(itReport);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())

@@ -16,6 +16,7 @@ public class AccReportTest {
         Employee worker = new Employee("Ivan", now, now, 7000);
         store.add(worker);
         AccReport engine = new AccReport(store, Currency.EUR);
+        ReportEngine reportEngine = new ReportEngine(engine);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
@@ -23,6 +24,6 @@ public class AccReportTest {
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
                 .append(worker.getSalary() / engine.getValue().getCost());
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertThat(reportEngine.generate(em -> true), is(expect.toString()));
     }
 }

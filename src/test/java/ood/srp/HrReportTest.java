@@ -1,10 +1,7 @@
 package ood.srp;
 
 import org.junit.Test;
-import ru.job4j.ood.srp.AccReport;
-import ru.job4j.ood.srp.Employee;
-import ru.job4j.ood.srp.HrReport;
-import ru.job4j.ood.srp.MemStore;
+import ru.job4j.ood.srp.*;
 
 import java.util.Calendar;
 
@@ -24,6 +21,7 @@ public class HrReportTest {
         store.add(workerIt);
 
         HrReport engine = new HrReport(store);
+        ReportEngine reportEngine = new ReportEngine(engine);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Salary;")
                 .append(System.lineSeparator())
@@ -35,6 +33,6 @@ public class HrReportTest {
                 .append(System.lineSeparator())
                 .append(worker.getName()).append(";")
                 .append(worker.getSalary()).append(";");
-        assertThat(engine.generate(em -> true), is(expect.toString()));
+        assertThat(reportEngine.generate(em -> true), is(expect.toString()));
     }
 }
