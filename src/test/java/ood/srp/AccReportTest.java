@@ -15,7 +15,8 @@ public class AccReportTest {
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 7000);
         store.add(worker);
-        AccReport engine = new AccReport(store, Currency.EUR);
+        SalaryConverter salaryConverter = new SalaryConverter();
+        AccReport engine = new AccReport(store, salaryConverter);
         ReportEngine reportEngine = new ReportEngine(engine);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
@@ -23,7 +24,7 @@ public class AccReportTest {
                 .append(worker.getName()).append(";")
                 .append(worker.getHired()).append(";")
                 .append(worker.getFired()).append(";")
-                .append(worker.getSalary() / engine.getValue().getCost());
+                .append(salaryConverter.convert(worker.getSalary()));
         assertThat(reportEngine.generate(em -> true), is(expect.toString()));
     }
 }

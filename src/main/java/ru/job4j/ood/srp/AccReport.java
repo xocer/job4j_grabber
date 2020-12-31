@@ -4,14 +4,14 @@ import java.util.function.Predicate;
 
 public class AccReport implements Report {
     private final Store store;
-    private final Currency value;
+    private final Converter value;
 
-    public AccReport(Store store, Currency value) {
+    public AccReport(Store store, Converter value) {
         this.store = store;
         this.value = value;
     }
 
-    public Currency getValue() {
+    public Converter getValue() {
         return value;
     }
 
@@ -24,7 +24,7 @@ public class AccReport implements Report {
                     .append(employee.getName()).append(";")
                     .append(employee.getHired()).append(";")
                     .append(employee.getFired()).append(";")
-                    .append(employee.getSalary() / value.getCost());
+                    .append(value.convert(employee.getSalary()));
         }
         return text.toString();
     }
