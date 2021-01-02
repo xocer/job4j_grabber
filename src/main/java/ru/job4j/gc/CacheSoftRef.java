@@ -17,10 +17,10 @@ public class CacheSoftRef {
         this.nameDir = nameDir;
     }
 
-    public SoftReference<String> get(String key) {
-        SoftReference<String> result = null;
+    public String get(String key) {
+        String result = null;
         if (cash.containsKey(key)) {
-            result = cash.get(key);
+            result = cash.get(key).get();
         } else {
             result = add(key);
         }
@@ -28,22 +28,22 @@ public class CacheSoftRef {
         return result;
     }
 
-    public SoftReference<String> add(String key) {
+    public String add(String key) {
         Path path = Paths.get(nameDir + "\\" + key);
         StringBuilder builder = new StringBuilder();
-        SoftReference<String> result = null;
+        String result = null;
 
         if (Files.isRegularFile(path)) {
             try (BufferedReader reader = new BufferedReader(new FileReader(path.toString()))) {
                 while (reader.ready()) {
                     builder.append(reader.readLine());
                 }
-                result = new SoftReference<>(builder.toString());
+                result = builder.toString();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        cash.put(nameDir, result);
+        cash.put(nameDir, new SoftReference<>(result));
         return result;
     }
 }
