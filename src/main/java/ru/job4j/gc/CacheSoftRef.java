@@ -21,6 +21,9 @@ public class CacheSoftRef {
         String result = null;
         if (cash.containsKey(key)) {
             result = cash.get(key).get();
+            if (result == null) {
+                result = add(key);
+            }
         } else {
             result = add(key);
         }
