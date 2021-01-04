@@ -9,6 +9,13 @@ public class Food {
     private double price;
     private int discount;
 
+    public Food(String name, LocalDate expiryDate, LocalDate createDate, double price) {
+        this.name = name;
+        this.expiryDate = expiryDate;
+        this.createDate = createDate;
+        this.price = price;
+    }
+
     public String getName() {
         return name;
     }
