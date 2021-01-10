@@ -23,9 +23,9 @@ public class SimpleParkingTest {
     @Test
     public void whenAddTruckCarsNormal() {
         Parking parking = new SimpleParking(10, 5);
-        parking.add(new Car(321));
-        parking.add(new Car(2));
-        parking.add(new Car(44));
+        parking.add(new TruckCar(321, 2));
+        parking.add(new TruckCar(2, 3));
+        parking.add(new TruckCar(44, 4));
         assertThat(parking.getFreeCarsPlaces(), is(2));
     }
 
@@ -51,7 +51,7 @@ public class SimpleParkingTest {
 
     @Test(expected = Exception.class)
     public void whenAddFail() {
-        Parking parking = new SimpleParking(10, 0);
+        Parking parking = new SimpleParking(1, 0);
         parking.add(new Car(44));
         parking.add(new TruckCar(4, 2));
     }
@@ -61,7 +61,7 @@ public class SimpleParkingTest {
         Parking parking = new SimpleParking(10, 5);
         parking.add(new Car(22));
         parking.add(new TruckCar(6, 5));
-        parking.remove(22);
+        parking.remove(2);
     }
 
     @Test
