@@ -1,9 +1,11 @@
 package ru.job4j.ood.lsp.parking;
 
 public interface Parking {
-    boolean add(Auto auto);
+    boolean add(Auto auto) throws Exception;
 
     void remove(Auto auto);
 
-    int getFreePlaces();
+    int getFreeCarsPlaces();
+
+    int getFreeTruckCarsPlaces();
 }
