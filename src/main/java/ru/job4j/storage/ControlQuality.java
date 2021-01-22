@@ -26,4 +26,12 @@ public class ControlQuality {
             }
         }
     }
+
+    public void resort() {
+        List<Food> allFood = new ArrayList<>();
+        for (FoodStore s : storages) {
+            allFood.addAll(s.clear());
+        }
+        allFood.forEach(s -> distribute(s));
+    }
 }

@@ -27,7 +27,7 @@ public class Shop implements FoodStore {
     @Override
     public List<Food> clear() {
         List<Food> list = new ArrayList<>();
-        Collections.copy(products, list);
+        list.addAll(products);
         products.clear();
         return list;
     }
