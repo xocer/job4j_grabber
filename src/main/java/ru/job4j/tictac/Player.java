@@ -6,7 +6,7 @@ public interface Player {
     // сможем передавать общий для всех игроков массив
 
     // игрок указывает координаты, в какую ячейку он хочет поставить крестик/нолик
-    boolean makeMove(int x, int y);
+    boolean makeMove(String[][] array, int x, int y);
 
-    void add(int[][] array, int x, int y);
+    void add(String[][] array, int x, int y);
 }
