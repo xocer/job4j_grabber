@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Menu {
-    boolean add(String parent, String child);
+    boolean add(String parent, String child, Action action);
 
     Optional<Node> findBy(String value);
 
@@ -15,9 +15,11 @@ public interface Menu {
     class Node {
         String value;
         final List<Node> children = new ArrayList<>();
+        Action action;
 
-        public Node(String value) {
+        public Node(String value, Action action) {
             this.value = value;
+            this.action = action;
         }
 
         @Override

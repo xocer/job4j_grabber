@@ -14,11 +14,11 @@ public class SimpleMenu implements Printable, Action, Menu {
     }
 
     @Override
-    public boolean add(String parent, String child) {
+    public boolean add(String parent, String child, Action action) {
         boolean rsl = false;
         Optional<Node> tmp = findBy(parent);
         if (tmp.isPresent() && !findBy(child).isPresent()) {
-            tmp.get().getChildren().add(new Node(child));
+            tmp.get().getChildren().add(new Node(child, action));
             rsl = true;
         }
         return rsl;
@@ -41,16 +41,6 @@ public class SimpleMenu implements Printable, Action, Menu {
     }
 
     @Override
-    public void order(String menuItem) {
-
-    }
-
-    @Override
-    public void giveOrder() {
-
-    }
-
-    @Override
     public void printToConsole(Menu menu) {
 
     }
@@ -60,14 +50,19 @@ public class SimpleMenu implements Printable, Action, Menu {
 
     }
 
-    public static void main(String[] args) {
-        SimpleMenu menu = new SimpleMenu(new Node("Задача 0"));
-        menu.add("Задача 0", "Задача 1.");
-        menu.add("Задача 1.", "Задача 1.1.");
-        menu.add("Задача 1.", "Задача 1.2.");
-        menu.add("Задача 1.2.", "Задача 1.2.1.");
-        menu.add("Задача 1.1.", "Задача 1.1.1.");
-        menu.add("Задача 0", "Задача 2.");
-        menu.printToConsole(menu);
+    @Override
+    public void act() {
+
     }
+
+//    public static void main(String[] args) {
+//        SimpleMenu menu = new SimpleMenu(new Node("Задача 0"));
+//        menu.add("Задача 0", "Задача 1.");
+//        menu.add("Задача 1.", "Задача 1.1.");
+//        menu.add("Задача 1.", "Задача 1.2.");
+//        menu.add("Задача 1.2.", "Задача 1.2.1.");
+//        menu.add("Задача 1.1.", "Задача 1.1.1.");
+//        menu.add("Задача 0", "Задача 2.");
+//        menu.printToConsole(menu);
+//    }
 }
