@@ -1,4 +1,4 @@
-package ru.job4j.ocp;
+package ru.job4j.ood.ocp;
 
 public class ConsoleSender {
     public void sendToConsole(String text) {
