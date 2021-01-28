@@ -8,10 +8,6 @@ public class ThreadState {
         System.out.println(first.getState());
         first.start();
         System.out.println(first.getName() + " нить запущена");
-        while (first.getState() != Thread.State.TERMINATED) {
-            System.out.println(first.getState());
-        }
-        System.out.println(first.getState());
 
         Thread second = new Thread(
                 () -> {}
@@ -19,9 +15,13 @@ public class ThreadState {
         System.out.println(second.getState());
         second.start();
         System.out.println(second.getName() + " нить запущена");
-        while (second.getState() != Thread.State.TERMINATED) {
+
+        while (first.getState() != Thread.State.TERMINATED
+                || second.getState() != Thread.State.TERMINATED) {
+            System.out.println(first.getState());
             System.out.println(second.getState());
         }
+        System.out.println(first.getState());
         System.out.println(second.getState());
 
         first.join();
