@@ -1,5 +1,8 @@
 package ru.job4j.concurrent;
 
+import net.jcip.annotations.NotThreadSafe;
+
+@NotThreadSafe
 public class Node<T> {
     private final Node next;
     private final T value;
