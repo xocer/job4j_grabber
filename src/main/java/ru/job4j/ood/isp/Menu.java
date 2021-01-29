@@ -13,9 +13,9 @@ public interface Menu {
 
     @Data
     class Node {
-        String value;
-        final List<Node> children = new ArrayList<>();
-        Action action;
+        private String value;
+        private final List<Node> children = new ArrayList<>();
+        private final Action action;
 
         public Node(String value, Action action) {
             this.value = value;
