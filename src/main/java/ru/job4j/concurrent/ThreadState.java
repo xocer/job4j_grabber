@@ -24,9 +24,6 @@ public class ThreadState {
         System.out.println(first.getState());
         System.out.println(second.getState());
 
-        first.join();
-        second.join();
-
         System.out.println("Все нити закончили работу и метод main тоже");
     }
 }
