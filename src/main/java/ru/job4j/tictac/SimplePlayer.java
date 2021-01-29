@@ -1,16 +1,16 @@
 package ru.job4j.tictac;
 
 public class SimplePlayer implements Player {
-    Specification specification;
-    String symbol;
+    private Logic logic;
+    private String symbol;
 
     public SimplePlayer(String symbol) {
         this.symbol = symbol;
     }
 
     @Override
-    public boolean makeMove(String[][] array, int x, int y) {
-        if (specification.checkFields(x, y)) {
+    public boolean makeMove(Board array, int x, int y) {
+        if (logic.checkFields(x, y)) {
             add(array, x, y);
             return true;
         }
@@ -18,7 +18,7 @@ public class SimplePlayer implements Player {
     }
 
     @Override
-    public void add(String[][] array, int x, int y) {
-        array[x][y] = symbol;
+    public void add(Board array, int x, int y) {
+        array.setArray(x, y, symbol);
     }
 }

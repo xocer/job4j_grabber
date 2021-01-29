@@ -3,10 +3,13 @@ package ru.job4j.tictac;
 import java.io.OutputStream;
 
 public class Game implements Field, ConsoleHelper{
-    final Mark<OutputStream> markO = new ConsoleMarkO();
-    final Mark<OutputStream> markX = new ConsoleMarkX();
-    final String[][] array = new String[3][3];
-    Player activePlayer;
+    private final Mark<OutputStream> markO = new ConsoleMarkO();
+    private final Mark<OutputStream> markX = new ConsoleMarkX();
+    private Player activePlayer;
+    private Player simplePlayer;
+    private Player computerPlayer;
+    private Logic logic;
+    private Board board;
 
     @Override
     public boolean isFinish(int[][] fieldsArray) {
