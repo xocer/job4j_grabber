@@ -4,3 +4,4 @@ target
 /.travis.yml
 'checkstyle.xml'
 'lombok.config'
+*.txt
