@@ -1,8 +1,14 @@
 package ru.job4j.concurrent;
 
-import java.io.*;
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 
+import java.io.*;
+import java.util.function.Predicate;
+
+@ThreadSafe
 public class ParseFile {
+    @GuardedBy("this")
     private File file;
 
     public synchronized void setFile(File f) {
@@ -13,29 +19,28 @@ public class ParseFile {
         return file;
     }
 
-    public synchronized String getContent() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        StringBuilder builder = new StringBuilder();
-        while (reader.ready()) {
-            builder.append(reader.readLine());
-        }
-        return builder.toString();
+    public String getContent() throws IOException {
+        return getText(i -> i > -1);
     }
 
-    public synchronized String getContentWithoutUnicode() throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
+    public String getContentWithoutUnicode() throws IOException {
+        return getText(i -> i > -1 && i < 0x80);
+    }
+
+    private synchronized String getText(Predicate<Integer> predicate) throws IOException {
         StringBuilder builder = new StringBuilder();
-        int data;
-        while ((data = reader.read()) != -1) {
-            if (data < 0x80) {
-                builder.append((char) data);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            int data;
+            while (predicate.test(data = reader.read())) {
+                builder.append(data);
             }
         }
         return builder.toString();
     }
 
     public synchronized void saveContent(String content) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-        writer.write(content);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(content);
+        }
     }
 }
