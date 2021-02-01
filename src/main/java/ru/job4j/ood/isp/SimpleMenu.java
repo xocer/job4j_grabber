@@ -40,9 +40,13 @@ public class SimpleMenu implements Printable, Menu {
     }
 
     @Override
-    public void print(Node node, int level) {
-        if (!node.getChildren().isEmpty()) {
-            for (Node tmp : node.getChildren()) {
+    public void print() {
+        printMenu(root, 0);
+    }
+
+    private void printMenu(Node root, int level) {
+        if (!root.getChildren().isEmpty()) {
+            for (Node tmp : root.getChildren()) {
                 if (level != 0) {
                     String name = tmp.getValue();
                     StringBuilder newName = new StringBuilder();
@@ -53,7 +57,7 @@ public class SimpleMenu implements Printable, Menu {
                     tmp.setValue(newName.toString());
                 }
                 System.out.println(tmp);
-                print(tmp, ++level);
+                printMenu(tmp, ++level);
                 level--;
             }
         }
@@ -67,6 +71,6 @@ public class SimpleMenu implements Printable, Menu {
         menu.add("Задача 1.2.", "Задача 1.2.1.", new SimpleAction());
         menu.add("Задача 1.1.", "Задача 1.1.1.", new SimpleAction());
         menu.add("Задача 0", "Задача 2.", new SimpleAction());
-        menu.print(menu.getRoot(), 0);
+        menu.print();
     }
 }
