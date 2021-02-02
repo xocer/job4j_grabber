@@ -40,10 +40,15 @@ public class Wgett implements Runnable {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        String url = args[0];
-        int speed = Integer.parseInt(args[1]);
-        Thread wget = new Thread(new Wgett(url, speed, new File("result.txt")));
-        wget.start();
-        wget.join();
+        if (args.length > 2) {
+            String url = args[0];
+            int speed = Integer.parseInt(args[1]);
+            File path = new File(args[2]);
+            Thread wget = new Thread(new Wgett(url, speed, path));
+            wget.start();
+            wget.join();
+        } else {
+            System.out.println("Параметры не были заданы");
+        }
     }
 }
