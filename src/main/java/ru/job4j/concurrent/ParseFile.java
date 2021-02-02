@@ -31,8 +31,10 @@ public class ParseFile {
         StringBuilder builder = new StringBuilder();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             int data;
-            while (predicate.test(data = reader.read())) {
-                builder.append(data);
+            while ((data = reader.read()) != -1) {
+                if (predicate.test(data)) {
+                    builder.append((char) data);
+                }
             }
         }
         return builder.toString();
@@ -42,5 +44,12 @@ public class ParseFile {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(content);
         }
+    }
+
+    public static void main(String[] args) throws IOException {
+        ParseFile parseFile = new ParseFile();
+        parseFile.setFile(new File("test.txt"));
+        System.out.println(parseFile.getContent());
+        System.out.println(parseFile.getContentWithoutUnicode());
     }
 }
