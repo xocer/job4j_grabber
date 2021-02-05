@@ -18,10 +18,10 @@ public class SingleLockList<T> implements Iterable<T> {
         return array.get(index);
     }
 
-    public List<T> copy(SimpleArray<T> list) {
+    private List<T> copy(SimpleArray<T> list) {
         ArrayList<T> result = new ArrayList<>();
         for (int i = 0; i < list.getSize(); i++) {
-            result.add((T) list.getContainer()[i]);
+            result.add(list.get(i));
         }
         return result;
     }
