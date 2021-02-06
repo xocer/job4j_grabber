@@ -22,7 +22,7 @@ public class CountBarrier {
     }
 
     public synchronized void await() {
-        while (count != total) {
+        while (count <= total) {
             try {
                 System.out.println("Await ждет");
                 monitor.wait();

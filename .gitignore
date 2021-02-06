@@ -2,6 +2,6 @@
 target
 .idea
 /.travis.yml
-'checkstyle.xml'
-'lombok.config'
 *.txt
+/checkstyle.xml
+/lombok.config
