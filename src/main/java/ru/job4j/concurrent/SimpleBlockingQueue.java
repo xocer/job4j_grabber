@@ -20,27 +20,19 @@ public class SimpleBlockingQueue<T> {
         this.size = size;
     }
 
-    public synchronized void offer(T value) {
+    public synchronized void offer(T value) throws InterruptedException {
         while (queue.size() == size) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait();
         }
         queue.offer(value);
         count++;
         notify();
     }
 
-    public synchronized T poll() {
+    public synchronized T poll() throws InterruptedException {
         T tmp;
         while (queue.isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait();
         }
 
         tmp = queue.poll();
@@ -55,13 +47,21 @@ public class SimpleBlockingQueue<T> {
 
         Thread produce = new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                queue.offer(random.nextInt(50));
+                try {
+                    queue.offer(random.nextInt(50));
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         Thread consume = new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                System.out.println(queue.poll());
+                try {
+                    System.out.println(queue.poll());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
