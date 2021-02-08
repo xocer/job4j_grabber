@@ -1,6 +1,5 @@
 package ru.job4j.concurrent;
 
-import lombok.Getter;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
@@ -13,8 +12,6 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private final Queue<T> queue = new LinkedList<>();
     private final int size;
-    @Getter
-    private int count;
 
     public SimpleBlockingQueue(int size) {
         this.size = size;
@@ -25,7 +22,6 @@ public class SimpleBlockingQueue<T> {
             wait();
         }
         queue.offer(value);
-        count++;
         notify();
     }
 
@@ -36,7 +32,6 @@ public class SimpleBlockingQueue<T> {
         }
 
         tmp = queue.poll();
-        count--;
         notify();
         return tmp;
     }
@@ -67,5 +62,9 @@ public class SimpleBlockingQueue<T> {
 
         produce.start();
         consume.start();
+    }
+
+    public boolean isEmpty() {
+        return queue.isEmpty();
     }
 }
