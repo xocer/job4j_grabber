@@ -2,8 +2,7 @@ package ru.job4j.cach;
 
 public class Base {
     private final int id;
-
-    private int version;
+    private final int version;
 
     private String name;
     public Base(int id, int version) {
@@ -17,10 +16,6 @@ public class Base {
 
     public int getVersion() {
         return version;
-    }
-
-    public void setVersion(int version) {
-        this.version = version;
     }
 
     public String getName() {

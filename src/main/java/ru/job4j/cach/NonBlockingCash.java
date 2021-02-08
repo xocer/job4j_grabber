@@ -10,12 +10,14 @@ public class NonBlockingCash {
     }
     public boolean update(Base model) {
         return memory.computeIfPresent(model.getId(), (a, b) -> {
-            int version = model.getVersion();
-            if (b.getVersion() != version) {
+            if (b.getVersion() != model.getVersion()) {
                 throw new OptimisticException("Ошибочка");
             }
-            model.setVersion(++version);
-            return model;
+            int newVersion = model.getVersion() + 1;
+            Base res = new Base(model.getId(), newVersion);
+            res.setName(model.getName());
+
+            return res;
         }) != null;
     }
 
