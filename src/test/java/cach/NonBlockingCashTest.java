@@ -27,7 +27,7 @@ public class NonBlockingCashTest {
         three.setName("Jon");
         cash.update(three);
 
-        assertThat(cash.getMemory().get(1).getVersion(), is(2));
+        assertThat(cash.find(1).getVersion(), is(2));
     }
 
     @Test

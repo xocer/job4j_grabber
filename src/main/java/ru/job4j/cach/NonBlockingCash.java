@@ -25,7 +25,10 @@ public class NonBlockingCash {
         return memory.remove(model.getId(), model);
     }
 
-    public ConcurrentHashMap<Integer, Base> getMemory() {
-        return memory;
+    public synchronized Base find(int id) {
+        Base tmp = memory.get(id);
+        Base result = new Base(tmp.getId(), tmp.getVersion());
+        result.setName(tmp.getName());
+        return result;
     }
 }
