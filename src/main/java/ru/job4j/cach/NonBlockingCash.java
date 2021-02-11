@@ -8,6 +8,7 @@ public class NonBlockingCash {
     public boolean add(Base model) {
         return memory.putIfAbsent(model.getId(), model) == null;
     }
+
     public boolean update(Base model) {
         return memory.computeIfPresent(model.getId(), (a, b) -> {
             if (b.getVersion() != model.getVersion()) {

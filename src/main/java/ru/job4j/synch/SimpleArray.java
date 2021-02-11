@@ -8,6 +8,7 @@ public class SimpleArray<T> implements Iterable<T> {
     private int size;
     private int modCount;
     private int point = 0;
+
     public int getSize() {
         return size;
     }

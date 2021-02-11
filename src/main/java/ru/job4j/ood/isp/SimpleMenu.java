@@ -6,7 +6,7 @@ import java.util.*;
 
 @Data
 public class SimpleMenu implements Printable, Menu {
-    final Node root;
+    private final Node root;
 
     public SimpleMenu(Node root) {
         this.root = root;

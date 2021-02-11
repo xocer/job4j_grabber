@@ -1,4 +1,4 @@
-package ru.job4j.conc__store;
+package ru.job4j.concstore;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;

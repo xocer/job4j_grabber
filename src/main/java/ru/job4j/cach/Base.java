@@ -5,6 +5,7 @@ public class Base {
     private final int version;
 
     private String name;
+
     public Base(int id, int version) {
         this.id = id;
         this.version = version;

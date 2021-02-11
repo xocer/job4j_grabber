@@ -9,8 +9,6 @@ import java.io.IOException;
 
 public class Article {
 
-
-
     public static boolean generateBy(String origin, String line) {
         String[] split = origin.split("[^a-zA-Zа-яёА-ЯЁ]");
         String[] newText = line.split("[^a-zA-Zа-яёА-ЯЁ]");
@@ -42,9 +40,8 @@ public class Article {
     }
 
     @Benchmark
-    public void testBenchmark () {
-        generateBy("Мама мыла раму и окно",
-                "мыла пол");
+    public void testBenchmark() {
+        generateBy("Мама мыла раму и окно", "мыла пол");
     }
 
     @Benchmark

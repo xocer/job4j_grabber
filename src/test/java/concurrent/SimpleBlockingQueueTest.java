@@ -10,7 +10,8 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class SimpleBlockingQueueTest {
-    static volatile int count = 0;
+    private static volatile int count = 0;
+
     @Test
     public void thenAllGood() throws InterruptedException {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(10);

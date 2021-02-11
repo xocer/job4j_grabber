@@ -10,7 +10,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-
 public class NonBlockingCashTest {
     @Test
     public void whenOk() throws InterruptedException {

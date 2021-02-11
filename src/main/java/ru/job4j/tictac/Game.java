@@ -2,7 +2,7 @@ package ru.job4j.tictac;
 
 import java.io.OutputStream;
 
-public class Game implements Field, ConsoleHelper{
+public class Game implements Field, ConsoleHelper {
     private final Mark<OutputStream> markO = new ConsoleMarkO();
     private final Mark<OutputStream> markX = new ConsoleMarkX();
     private Player activePlayer;
@@ -22,9 +22,13 @@ public class Game implements Field, ConsoleHelper{
     }
 
     public void game(Player first, Player second) {
-        // тут будет такая логика - реализую метод isFinish, запущу цикл, пока этот метод не даст true
-        // дальше делаем запрос к пользователю ввести координаты, вызываем у активного игрока метод makeMove, передаем туда координаты
-        // делаем еще раз проверку isFinish, если false, меняем активного пользователя и ход делает второй игрок
+
+        // тут будет такая логика - реализую метод isFinish,
+        // запущу цикл, пока этот метод не даст true
+        // дальше делаем запрос к пользователю ввести координаты,
+        // вызываем у активного игрока метод makeMove, передаем туда координаты
+        // делаем еще раз проверку isFinish, если false,
+        // меняем активного пользователя и ход делает второй игрок
     }
 
     public static void main(String[] args) {

@@ -31,14 +31,14 @@ public class ThreadPool {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        ThreadPool threadPool = new ThreadPool( 5);
+        ThreadPool threadPool = new ThreadPool(5);
 
-        for(int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             int taskNo = i;
             threadPool.work(() -> {
                 String message =
                         Thread.currentThread().getName()
-                                + ": Task " + taskNo ;
+                                + ": Task " + taskNo;
                 System.out.println(message);
             });
         }

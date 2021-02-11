@@ -1,6 +1,6 @@
 package ru.job4j.tictac;
 
-public class ComputerPlayer implements Player{
+public class ComputerPlayer implements Player {
     private String symbol;
 
     public ComputerPlayer(String symbol) {

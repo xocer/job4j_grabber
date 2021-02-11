@@ -17,7 +17,8 @@ public class CountBarrier {
 
     public synchronized void count() {
         count++;
-        System.out.println(Thread.currentThread().getName() + " увеличила нить на 1 раз. Count сейчас равен " + count);
+        System.out.println(Thread.currentThread().getName()
+                + " увеличила нить на 1 раз. Count сейчас равен " + count);
         monitor.notifyAll();
     }
 
