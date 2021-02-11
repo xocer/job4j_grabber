@@ -25,10 +25,7 @@ public class NonBlockingCash {
         return memory.remove(model.getId(), model);
     }
 
-    public synchronized Base find(int id) {
-        Base tmp = memory.get(id);
-        Base result = new Base(tmp.getId(), tmp.getVersion());
-        result.setName(tmp.getName());
-        return result;
+    public Base find(int id) {
+        return memory.get(id);
     }
 }
