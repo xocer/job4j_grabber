@@ -18,7 +18,7 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized void offer(T value) throws InterruptedException {
-        while (queue.size() == size) {
+        while (queue.size() >= size) {
             wait();
         }
         queue.offer(value);
@@ -64,7 +64,7 @@ public class SimpleBlockingQueue<T> {
         consume.start();
     }
 
-    public boolean isEmpty() {
+    public synchronized boolean isEmpty() {
         return queue.isEmpty();
     }
 }
