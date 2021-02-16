@@ -29,9 +29,9 @@ public class SimpleBlockingQueue<T> {
         while (queue.isEmpty()) {
             wait();
         }
-
-        notify();
-        return queue.poll();
+        T tmp = queue.poll();
+        notifyAll();
+        return tmp;
     }
 
     public static void main(String[] args) {
